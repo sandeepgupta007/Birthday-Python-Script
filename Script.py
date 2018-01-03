@@ -26,7 +26,7 @@ import requests
 	than 3 Jan, 18:30 will be UTC for that purpose.	
 	
 '''
-bday = datetime(2018, 1, 2, 18, 30, 0)
+bday = datetime(2018, 1, 3, 18, 30, 0)
 
 '''
 	acess token from facebook developer website
@@ -85,7 +85,7 @@ def get_posts(url, wishes=None):
         if req.status_code == 200:
             
             content = req.json()
-            print (content)
+            #print (content)
             #keep only relevant fields from post data
             '''feed = []
             for post in content['data']:
@@ -131,26 +131,7 @@ if __name__ == '__main__':
     params = {'since': utc_bday, 'access_token': access_token}
     url = '%s?%s' % (base_url, urlencode(params))
     posts = get_posts(url)
-    
-    #confirm before posting
-	#d = len(posts)
-	#print (posts)
-	#print("Found %s birthday wishes, Ready to thank them?"%len(posts))
+    print ("Found - ",end=" ")
+    print(len(posts))
     usersignal = confirm()
-    
-    #post if user said yes
-    '''
-	if usersignal is True:
-        for post in posts:
-
-            #thank the user
-            if comment:
-                reply = choice(message_set)
-                print 'Replying %s to %s' % (reply, wish['from'])
-                url = 'https://graph.facebook.com/%s/comments?access_token=%s' % (wish['id'], access_token)
-                requests.post(url, data={'message': reply})
-
-            if like:
-                url = 'https://graph.facebook.com/%s/likes?access_token=%s' % (wish['id'], access_token)
-                requests.post(url, data="") 
-	'''
+    print (usersignal)
